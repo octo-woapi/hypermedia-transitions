@@ -5,6 +5,51 @@
 
 This module is designed to help you to add hypermedia support for you API. 
 
+## Status
+
+**Complete**
+
+## Getting started
+
+1. Install the package with 
+```bash
+npm install --save hypermedia-transitions
+```
+2. Describe your transitions in a dedicated file. Short example : 
+```javascript
+const list_transitions = [
+  {
+    rel: "resource_list", 
+    target: "resource list",
+    accessibleFrom: [{ state: "home" }],
+    href: "/resources",
+    method: "get"
+  },
+  {
+    rel: "resource", 
+    target: "resource",
+    accessibleFrom: [{ state: "resource list" }],
+    href: "/resources/{id}",
+    isUrlTemplate: true,
+    method: "get"
+  },
+  {
+    rel: "resource_delete", 
+    target: "resource",
+    accessibleFrom: [{ state: "resource list" }],
+    href: "/resources/{id}",
+    isUrlTemplate: true,
+    method: "delete",
+    authRequired: true
+  }
+]
+```
+
+More details on how to describe your transitions below. 
+
+3. Register `hypermedia-transitions` into your API framework, as an Express middleware or as a Hapi plugin (see details below for each framework).
+4. You're all set ! 
+
 ## Features 
 
 This module consists of : 
